@@ -16,7 +16,7 @@ export class TarefaService {
     }
   }
 
-  async update(data: UpdateTarefaDto, id: bigint): Promise<Tarefa> {
+  async update(id: bigint, data: UpdateTarefaDto): Promise<Tarefa> {
     return this.prisma.tarefa.update({ where: { id }, data });
   }
 

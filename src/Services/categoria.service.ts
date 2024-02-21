@@ -12,7 +12,7 @@ export class CategoriaService {
     return this.prisma.categoria.create({ data });
   }
 
-  async update(data: UpdateCategoriaDto, id: bigint): Promise<Categoria> {
+  async update(id: bigint, data: UpdateCategoriaDto): Promise<Categoria> {
     return this.prisma.categoria.update({ where: { id }, data });
   }
 

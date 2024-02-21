@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   HttpException,
   Param,
   Patch,
@@ -19,20 +20,25 @@ export class CategoriaController {
   constructor(private categoriaService: CategoriaService) {}
 
   @Get()
+  @HttpCode(200)
   async findAll() {
     return await this.categoriaService.findAll();
   }
 
   @Get(':id')
+  @HttpCode(200)
   async findOne(@Param('id', BigIntPipe) id: bigint) {
-    try {
-      return await this.categoriaService.findOne(id);
-    } catch (error) {
+    const categoria: Categoria = await this.categoriaService.findOne(id);
+
+    if (categoria) {
+      return categoria;
+    } else {
       throw new HttpException('Categoria não encontrada', 404);
     }
   }
 
   @Post()
+  @HttpCode(201)
   async create(@Body() data: CreateCategoriaDto) {
     if (data.nome.length > 0) {
       return await this.categoriaService.create(data);
@@ -41,6 +47,7 @@ export class CategoriaController {
   }
 
   @Patch(':id')
+  @HttpCode(200)
   async update(
     @Param('id', BigIntPipe) id: bigint,
     @Body() data: UpdateCategoriaDto,
@@ -52,18 +59,21 @@ export class CategoriaController {
     if (data.nome == current.nome) {
       throw new HttpException('Nome da categoria é igual ao atual', 400);
     }
-    try {
-      return this.categoriaService.update(data, id);
-    } catch (error) {
+    const categoria: Categoria = await this.categoriaService.update(id, data);
+    if (categoria) {
+      return categoria;
+    } else {
       throw new HttpException('Categoria não encontrada', 404);
     }
   }
 
   @Delete(':id')
+  @HttpCode(200)
   async delete(@Param('id', BigIntPipe) id: bigint) {
-    try {
-      return await this.categoriaService.delete(id);
-    } catch (error) {
+    const categoria: Categoria = await this.categoriaService.delete(id);
+    if (categoria) {
+      return categoria;
+    } else {
       throw new HttpException('Categoria não encontrada', 404);
     }
   }
