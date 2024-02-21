@@ -1,10 +1,8 @@
-import Categoria from '../Categoria/Categoria';
-
 export default class Tarefa {
   id: bigint;
   nome: string;
   isActive: boolean;
-  categoriaId: Categoria;
+  categoriaId: bigint;
   createdAt: Date;
   updatedAt: Date;
 }

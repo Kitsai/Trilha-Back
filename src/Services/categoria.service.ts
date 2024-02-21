@@ -12,11 +12,11 @@ export class CategoriaService {
     return this.prisma.categoria.create({ data });
   }
 
-  async update(data: UpdateCategoriaDto, id: number): Promise<Categoria> {
+  async update(data: UpdateCategoriaDto, id: bigint): Promise<Categoria> {
     return this.prisma.categoria.update({ where: { id }, data });
   }
 
-  async delete(id: number): Promise<Categoria> {
+  async delete(id: bigint): Promise<Categoria> {
     return this.prisma.categoria.delete({ where: { id } });
   }
 
@@ -24,7 +24,7 @@ export class CategoriaService {
     return this.prisma.categoria.findMany();
   }
 
-  async findOne(id: number): Promise<Categoria> {
+  async findOne(id: bigint): Promise<Categoria> {
     return this.prisma.categoria.findUnique({ where: { id } });
   }
 }

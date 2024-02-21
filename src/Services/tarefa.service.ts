@@ -9,14 +9,18 @@ export class TarefaService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateTarefaDto): Promise<Tarefa> {
-    return this.prisma.tarefa.create({ data });
+    try {
+      return this.prisma.tarefa.create({ data });
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  async update(data: UpdateTarefaDto, id: number): Promise<Tarefa> {
+  async update(data: UpdateTarefaDto, id: bigint): Promise<Tarefa> {
     return this.prisma.tarefa.update({ where: { id }, data });
   }
 
-  async delete(id: number): Promise<Tarefa> {
+  async delete(id: bigint): Promise<Tarefa> {
     return this.prisma.tarefa.delete({ where: { id } });
   }
 
@@ -24,7 +28,11 @@ export class TarefaService {
     return this.prisma.tarefa.findMany();
   }
 
-  async findOne(id: number): Promise<Tarefa> {
-    return this.prisma.tarefa.findUnique({ where: { id } });
+  async findOne(id: bigint): Promise<Tarefa> {
+    try {
+      return this.prisma.tarefa.findUnique({ where: { id } });
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
