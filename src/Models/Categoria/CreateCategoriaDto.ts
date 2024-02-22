@@ -1,6 +1,6 @@
 export default class CreateCategoriaDto {
-  nome: string;
-  constructor(nome: string) {
-    this.nome = nome;
-  }
+    nome: string;
+    constructor(nome: string) {
+        this.nome = nome;
+    }
 }

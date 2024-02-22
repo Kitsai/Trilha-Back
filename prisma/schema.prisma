@@ -16,7 +16,7 @@ datasource db {
 model Tarefa {
   id            BigInt     @id @default(autoincrement())
   nome          String
-  isActive      Boolean    @default(false)
+  isActive      Boolean    @default(true)
   categoriaId   BigInt?
   categoria     Categoria? @relation(fields: [categoriaId], references: [id]) 
   createdAt     DateTime   @default(now())

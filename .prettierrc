@@ -1,4 +1,8 @@
 {
-  "singleQuote": true,
-  "trailingComma": "all"
+	"editor.formatOnSave": true,
+	"tabWidth": 4,
+	"requireConfig": false,
+	"semi": true,
+	"singleQuote": true,
+	"useTabs": false
 }

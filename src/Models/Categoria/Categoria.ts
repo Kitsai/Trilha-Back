@@ -1,5 +1,5 @@
 export default class Categoria {
-  id: bigint;
-  nome: string;
-  createdAt: Date;
+    public id: bigint;
+    public nome: string;
+    public createdAt: Date;
 }

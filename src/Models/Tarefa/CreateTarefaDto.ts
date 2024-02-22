@@ -1,8 +1,9 @@
 export default class CreateTarefaDto {
-  readonly nome: string;
-  public categoriaId: bigint;
+    public nome: string;
+    public categoriaId: bigint;
 
-  constructor(nome: string) {
-    this.nome = nome;
-  }
+    constructor(nome: string, categoriaId: bigint = null) {
+        this.nome = nome;
+        this.categoriaId = categoriaId;
+    }
 }
