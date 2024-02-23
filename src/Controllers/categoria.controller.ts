@@ -10,10 +10,10 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
-import Categoria from 'src/Models/Categoria/Categoria';
-import CreateCategoriaDto from 'src/Models/Categoria/CreateCategoriaDto';
-import UpdateCategoriaDto from 'src/Models/Categoria/UpdateCategoriaDto';
-import { CategoriaService } from 'src/Services/categoria.service';
+import Categoria from '../Models/Categoria/Categoria';
+import CreateCategoriaDto from '../Models/Categoria/CreateCategoriaDto';
+import UpdateCategoriaDto from '../Models/Categoria/UpdateCategoriaDto';
+import { CategoriaService } from '../Services/categoria.service';
 
 @Controller('categoria')
 export class CategoriaController {

@@ -11,12 +11,12 @@ import {
     Post,
     Query,
 } from '@nestjs/common';
-import CreateTarefaDto from 'src/Models/Tarefa/CreateTarefaDto';
-import ResponseTarefaDto from 'src/Models/Tarefa/ResponseTarefaDto';
-import Tarefa from 'src/Models/Tarefa/Tarefa';
-import UpdateTarefaDto from 'src/Models/Tarefa/UpdateTarefaDto';
-import { CategoriaService } from 'src/Services/categoria.service';
-import { TarefaService } from 'src/Services/tarefa.service';
+import CreateTarefaDto from '../Models/Tarefa/CreateTarefaDto';
+import ResponseTarefaDto from '../Models/Tarefa/ResponseTarefaDto';
+import Tarefa from '../Models/Tarefa/Tarefa';
+import UpdateTarefaDto from '../Models/Tarefa/UpdateTarefaDto';
+import { CategoriaService } from '../Services/categoria.service';
+import { TarefaService } from '../Services/tarefa.service';
 
 @Controller('tarefa')
 export class TarefaController {
@@ -32,14 +32,14 @@ export class TarefaController {
         @Query('categoria') categoriaId: string,
     ) {
         if (active !== undefined || categoriaId !== undefined) {
-            let object = {
+            const object = {
                 isActive: active !== undefined ? active === 'true' : undefined,
                 categoriaId:
                     categoriaId !== undefined
                         ? parseInt(categoriaId)
                         : undefined,
             };
-            let tarefas = await this.tarefaService.findAllThatApply(object);
+            const tarefas = await this.tarefaService.findAllThatApply(object);
             return Promise.all(
                 tarefas.map((tarefa) => this.ResponseFromEntity(tarefa)),
             );
