@@ -46,9 +46,9 @@ export class TarefaService {
         ).count;
     }
 
-    async findAllThatApplyActive(active: boolean): Promise<Tarefa[]> {
+    async findAllThatApply(object: object): Promise<Tarefa[]> {
         return await this.prisma.tarefa.findMany({
-            where: { isActive: active },
+            where: object,
         });
     }
 }

@@ -28,13 +28,18 @@ export class TarefaController {
     @Get()
     @HttpCode(200)
     async findAll(
-        @Query('active')
-        active: string,
+        @Query('active') active: string,
+        @Query('categoria') categoriaId: string,
     ) {
-        if (active !== undefined) {
-            let tarefas = await this.tarefaService.findAllThatApplyActive(
-                active === 'true',
-            );
+        if (active !== undefined || categoriaId !== undefined) {
+            let object = {
+                isActive: active !== undefined ? active === 'true' : undefined,
+                categoriaId:
+                    categoriaId !== undefined
+                        ? parseInt(categoriaId)
+                        : undefined,
+            };
+            let tarefas = await this.tarefaService.findAllThatApply(object);
             return Promise.all(
                 tarefas.map((tarefa) => this.ResponseFromEntity(tarefa)),
             );
@@ -102,7 +107,7 @@ export class TarefaController {
         }
     }
 
-    @Delete('completed')
+    @Delete()
     async deleteAllCompleted() {
         try {
             return await this.tarefaService.deleteAllCompleted();
