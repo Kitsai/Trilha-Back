@@ -9,7 +9,7 @@ export class TarefaService {
     constructor(private prisma: PrismaService) {}
 
     async create(data: CreateTarefaDto): Promise<Tarefa> {
-        return this.prisma.tarefa.create({ data }).catch((e) => {
+        return await this.prisma.tarefa.create({ data }).catch((e) => {
             if (e.code === 'P2025') {
                 throw new HttpException('Categoria não encontrada', 404);
             }
@@ -18,23 +18,37 @@ export class TarefaService {
     }
 
     async update(id: number, data: UpdateTarefaDto): Promise<Tarefa> {
-        return this.prisma.tarefa.update({ where: { id }, data }).catch((e) => {
-            if (e.code === 'P2025') {
-                throw new HttpException('Tarefa não encontrada', 404);
-            }
-            throw e;
-        });
+        return await this.prisma.tarefa
+            .update({ where: { id }, data })
+            .catch((e) => {
+                if (e.code === 'P2025') {
+                    throw new HttpException('Tarefa não encontrada', 404);
+                }
+                throw e;
+            });
     }
 
     async delete(id: number): Promise<Tarefa> {
-        return this.prisma.tarefa.delete({ where: { id } });
+        return await this.prisma.tarefa.delete({ where: { id } });
     }
 
     async findAll(): Promise<Tarefa[]> {
-        return this.prisma.tarefa.findMany();
+        return await this.prisma.tarefa.findMany();
     }
 
     async findOne(id: number): Promise<Tarefa> {
-        return this.prisma.tarefa.findUnique({ where: { id } });
+        return await this.prisma.tarefa.findUnique({ where: { id } });
+    }
+
+    async deleteAllCompleted(): Promise<number> {
+        return (
+            await this.prisma.tarefa.deleteMany({ where: { isActive: false } })
+        ).count;
+    }
+
+    async findAllThatApplyActive(active: boolean): Promise<Tarefa[]> {
+        return await this.prisma.tarefa.findMany({
+            where: { isActive: active },
+        });
     }
 }
