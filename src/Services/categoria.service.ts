@@ -12,7 +12,7 @@ export class CategoriaService {
         return this.prisma.categoria.create({ data });
     }
 
-    async update(id: bigint, data: UpdateCategoriaDto): Promise<Categoria> {
+    async update(id: number, data: UpdateCategoriaDto): Promise<Categoria> {
         return this.prisma.categoria
             .update({ where: { id }, data })
             .catch((e) => {
@@ -23,7 +23,7 @@ export class CategoriaService {
             });
     }
 
-    async delete(id: bigint): Promise<Categoria> {
+    async delete(id: number): Promise<Categoria> {
         return this.prisma.categoria.delete({ where: { id } }).catch((e) => {
             if (e.code === 'P2025') {
                 throw new HttpException('Categoria não encontrada', 404);
@@ -36,7 +36,7 @@ export class CategoriaService {
         return this.prisma.categoria.findMany();
     }
 
-    async findOne(id: bigint): Promise<Categoria> {
+    async findOne(id: number): Promise<Categoria> {
         return this.prisma.categoria
             .findUnique({ where: { id } })
             .catch((e) => {

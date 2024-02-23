@@ -1,8 +1,8 @@
 export default class Tarefa {
-    public id: bigint;
+    public id: number;
     public nome: string;
     public isActive: boolean;
-    public categoriaId: bigint;
+    public categoriaId: number;
     public createdAt: Date;
     public updatedAt: Date;
 }

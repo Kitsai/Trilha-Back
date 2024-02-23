@@ -6,12 +6,12 @@ import {
     HttpCode,
     HttpException,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
 } from '@nestjs/common';
 import CreateTarefaDto from 'src/Models/Tarefa/CreateTarefaDto';
 import UpdateTarefaDto from 'src/Models/Tarefa/UpdateTarefaDto';
-import { BigIntPipe } from 'src/Pipes/bigint.pipe';
 import { CategoriaService } from 'src/Services/categoria.service';
 import { TarefaService } from 'src/Services/tarefa.service';
 
@@ -30,7 +30,7 @@ export class TarefaController {
 
     @Get(':id')
     @HttpCode(200)
-    async findOne(@Param('id', BigIntPipe) id: bigint) {
+    async findOne(@Param('id', ParseIntPipe) id: number) {
         const tarefa = await this.tarefaService.findOne(id);
         if (tarefa) {
             return tarefa;
@@ -54,7 +54,7 @@ export class TarefaController {
 
     @Patch(':id')
     async update(
-        @Param('id', BigIntPipe) id: bigint,
+        @Param('id', ParseIntPipe) id: number,
         @Body() data: UpdateTarefaDto,
     ) {
         const tarefaAAtualizar = await this.tarefaService.findOne(id);
@@ -75,7 +75,7 @@ export class TarefaController {
     }
 
     @Delete(':id')
-    async delete(@Param('id', BigIntPipe) id: bigint) {
+    async delete(@Param('id', ParseIntPipe) id: number) {
         try {
             return await this.tarefaService.delete(id);
         } catch (error) {

@@ -17,7 +17,7 @@ export class TarefaService {
         });
     }
 
-    async update(id: bigint, data: UpdateTarefaDto): Promise<Tarefa> {
+    async update(id: number, data: UpdateTarefaDto): Promise<Tarefa> {
         return this.prisma.tarefa.update({ where: { id }, data }).catch((e) => {
             if (e.code === 'P2025') {
                 throw new HttpException('Tarefa não encontrada', 404);
@@ -26,7 +26,7 @@ export class TarefaService {
         });
     }
 
-    async delete(id: bigint): Promise<Tarefa> {
+    async delete(id: number): Promise<Tarefa> {
         return this.prisma.tarefa.delete({ where: { id } });
     }
 
@@ -34,7 +34,7 @@ export class TarefaService {
         return this.prisma.tarefa.findMany();
     }
 
-    async findOne(id: bigint): Promise<Tarefa> {
+    async findOne(id: number): Promise<Tarefa> {
         return this.prisma.tarefa.findUnique({ where: { id } });
     }
 }

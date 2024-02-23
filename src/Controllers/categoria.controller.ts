@@ -6,13 +6,13 @@ import {
     HttpCode,
     HttpException,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
 } from '@nestjs/common';
 import Categoria from 'src/Models/Categoria/Categoria';
 import CreateCategoriaDto from 'src/Models/Categoria/CreateCategoriaDto';
 import UpdateCategoriaDto from 'src/Models/Categoria/UpdateCategoriaDto';
-import { BigIntPipe } from 'src/Pipes/bigint.pipe';
 import { CategoriaService } from 'src/Services/categoria.service';
 
 @Controller('categoria')
@@ -27,7 +27,7 @@ export class CategoriaController {
 
     @Get(':id')
     @HttpCode(200)
-    async findOne(@Param('id', BigIntPipe) id: bigint) {
+    async findOne(@Param('id', ParseIntPipe) id: number) {
         const categoria: Categoria = await this.categoriaService.findOne(id);
 
         if (categoria) {
@@ -53,7 +53,7 @@ export class CategoriaController {
     @Patch(':id')
     @HttpCode(200)
     async update(
-        @Param('id', BigIntPipe) id: bigint,
+        @Param('id', ParseIntPipe) id: number,
         @Body() data: UpdateCategoriaDto,
     ) {
         if (data.nome.length === 0) {
@@ -76,7 +76,7 @@ export class CategoriaController {
 
     @Delete(':id')
     @HttpCode(200)
-    async delete(@Param('id', BigIntPipe) id: bigint) {
+    async delete(@Param('id', ParseIntPipe) id: number) {
         try {
             const categoria: Categoria = await this.categoriaService.delete(id);
             return categoria;

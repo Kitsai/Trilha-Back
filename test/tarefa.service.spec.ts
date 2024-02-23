@@ -15,7 +15,7 @@ describe('TarefaService', () => {
     });
     describe('create', () => {
         it('should create a tarefa', async () => {
-            const tarefaDto = new CreateTarefaDto('Teste', BigInt(1));
+            const tarefaDto = new CreateTarefaDto('Teste', 1);
             tarefa = await tarefaService.create(tarefaDto);
             expect(tarefa).toBeDefined();
         });

@@ -38,20 +38,20 @@ describe('CategoriaService', () => {
 
     describe('findOne', () => {
         it('should return category 1', async () => {
-            const result = await categoriaService.findOne(BigInt(1));
+            const result = await categoriaService.findOne(1);
             expect(result.nome).toBe('Teste');
         });
     });
 
     describe('update', () => {
         it('should update category 1 to "Teste Update"', async () => {
-            const result = await categoriaService.update(BigInt(1), {
+            const result = await categoriaService.update(1, {
                 nome: 'Teste Update',
             });
             expect(result.nome).toBe('Teste Update');
         });
         it('should set it back to "Teste"', async () => {
-            const result = await categoriaService.update(BigInt(1), {
+            const result = await categoriaService.update(1, {
                 nome: 'Teste',
             });
             expect(result.nome).toBe('Teste');

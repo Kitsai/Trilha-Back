@@ -1,25 +1,9 @@
-/*
-  Warnings:
-
-  - You are about to drop the `CategoriaEntity` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `TarefaEntity` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "TarefaEntity" DROP CONSTRAINT "TarefaEntity_categoriaId_fkey";
-
--- DropTable
-DROP TABLE "CategoriaEntity";
-
--- DropTable
-DROP TABLE "TarefaEntity";
-
 -- CreateTable
 CREATE TABLE "Tarefa" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
-    "isActive" BOOLEAN NOT NULL DEFAULT false,
-    "categoriaId" BIGINT,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "categoriaId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -28,7 +12,7 @@ CREATE TABLE "Tarefa" (
 
 -- CreateTable
 CREATE TABLE "Categoria" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
