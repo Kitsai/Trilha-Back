@@ -32,6 +32,8 @@ export class TarefaController {
         @Query('categoria') categoriaId: string,
     ) {
         if (active !== undefined || categoriaId !== undefined) {
+            if (active !== undefined && active !== 'true' && active !== 'false')
+                active = undefined;
             const object = {
                 isActive: active !== undefined ? active === 'true' : undefined,
                 categoriaId:
